@@ -1,0 +1,10 @@
+101,samsung
+102,apple
+103,evroopt
+104,reserved
+105,none
+201,sony
+202,puma
+203,adidas
+204,nike
+205,none

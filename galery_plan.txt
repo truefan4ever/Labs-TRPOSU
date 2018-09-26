@@ -1,0 +1,12 @@
+Floor 1:
+1 : Samsung
+2 : Apple
+3 : Evroopt
+4 : Reserved
+5 : Odji
+Floor 2:
+6 : Sony
+7 : Puma
+8 : Adidas
+9 : Nike
+10 : Xiaom

@@ -1,0 +1,10 @@
+1,ZARA
+2,Bershka
+3,Pull&bear
+4,Reserved
+5,Nike
+6,Sony
+7,Samsung
+8,Apple
+9,Adidas
+10,Xiaomi

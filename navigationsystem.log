@@ -1,0 +1,17 @@
+2018-09-26 19:13:06,848;input: 101; output: Samsung
+2018-09-26 19:13:10,368;input: 102; output: Apple
+2018-09-26 19:13:13,634;input: 103; output: Evroopt
+2018-09-26 19:13:15,811;input: 104; output: Reserved
+2018-09-26 19:13:18,165;input: 105; output: None
+2018-09-26 19:13:22,051;input: 205; output: None
+2018-09-26 19:13:25,752;input name: none; output: Floor-1, store number: 105
+2018-09-26 19:13:25,752;input name: none; output: Floor-1, store number: 205
+2018-09-26 19:13:33,440;input name: adidas; output: Floor-1, store number: 203
+2018-09-26 19:14:19,931;input number: dsfdsf; output: Please enter correct number
+(1-st floor: 1**, 2-nd floor: 2**)
+2018-09-26 19:14:24,551;input number: 201; output: Sony
+2018-09-26 19:14:27,939;input number: 202; output: Puma
+2018-09-26 19:14:31,634;input number: 203; output: Adidas
+2018-09-26 19:14:33,603;input number: 204; output: Nike
+2018-09-26 19:14:36,038;input number: 205; output: None
+2018-09-26 19:14:42,988;input name: puma; output: Floor-1, store number: 202
