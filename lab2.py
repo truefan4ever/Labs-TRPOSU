@@ -107,24 +107,25 @@ def choosing_the_number():
 
 
 def choosing_the_name():
-    try:
-        for key, value in stores.items():
-            if str(name.get()) == value:
-                if int(key) < 106:
-                    label_info2.config(text="Floor-1, store number: " + str(key))
-                    logging.info("input name: " + name.get() + "; output: " + "Floor-1, store number: " + str(key))
-                elif int(key) > 106 and int(key) < 206:
-                    label_info2.config(text="Floor-2 store number: " + str(key))
-                    logging.info("input name: " + name.get() + "; output: " + "Floor-1, store number: " + str(key))
 
-    except TypeError:
-        message = "Check the name!"
-        label_info2.config(text=message)
-         # print("Error")
+    for key, value in stores.items():
 
-
-
-
+        if str(name.get()) == str(value):
+            if int(key) < 106:
+                label_info2.config(text="Floor-1, store number: " + str(key))
+                logging.info("input name: " + name.get() + "; output: " + "Floor-1, store number: " + str(key))
+            elif int(key) > 106 and int(key) < 206:
+                label_info2.config(text="Floor-2 store number: " + str(key))
+                logging.info("input name: " + name.get() + "; output: " + "Floor-1, store number: " + str(key))
+            break
+        else:
+            message = "Check the name!"
+            label_info2.config(text=message)
+            logging.info("input name: " + name.get() + "; output: " + message)
+        # except TypeError:
+        #     message = "Check the name!"
+        #     label_info2.config(text=message)
+        #  # print("Error")
 
 
 fm = Menu(m)  # создается пункт меню с размещением на основном меню (m)
