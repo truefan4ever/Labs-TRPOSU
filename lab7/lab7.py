@@ -67,7 +67,7 @@ class Guest(tk.Toplevel):
 
         #entries
         self.entry_number = tk.Entry(self, textvariable=self.number) #creating the entry widget
-        self.entry_number.place(x=20, y=45) #pacing the entry widget
+        self.entry_number.place(x=20, y=45) #placing the entry widget
         self.entry_number['state'] = DISABLED #widget state
 
         self.entry_name = tk.Entry(self, textvariable=self.name)
@@ -76,7 +76,7 @@ class Guest(tk.Toplevel):
 
         #labels
         label_description = tk.Label(self, text='Enter the number:') #creating the label
-        label_description.place(x=20, y=10) #palcing the label
+        label_description.place(x=20, y=10) #placing the label
 
         label_name_store = tk.Label(self, text='Enter the name:')
         label_name_store.place(x=20, y=120)
@@ -204,7 +204,6 @@ class ManagerLogIn(tk.Toplevel):
         if result:
             global string
             string = ''.join(choice(ascii_letters) for i in range(12))
-            print(string)
             query = 'UPDATE stores SET random_string = ? WHERE username = ?'
             cursor.execute(query, [(string), (self.username.get())])
             db.commit()
