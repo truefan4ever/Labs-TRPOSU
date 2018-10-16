@@ -55,6 +55,7 @@ class Guest(tk.Toplevel):
     def __init__(self):
         super().__init__(root)
         self.init_child()
+
         
     def init_child(self):
         self.title('Navigation system') #the title of the window
@@ -64,7 +65,7 @@ class Guest(tk.Toplevel):
         self.number = StringVar()
         self.name = StringVar()
 
-        # entries
+        #entries
         self.entry_number = tk.Entry(self, textvariable=self.number) #creating the entry widget
         self.entry_number.place(x=20, y=45) #pacing the entry widget
         self.entry_number['state'] = DISABLED #widget state
@@ -73,7 +74,7 @@ class Guest(tk.Toplevel):
         self.entry_name.place(x=20, y=155)
         self.entry_name['state'] = DISABLED
 
-        # labels
+        #labels
         label_description = tk.Label(self, text='Enter the number:') #creating the label
         label_description.place(x=20, y=10) #palcing the label
 
@@ -86,7 +87,7 @@ class Guest(tk.Toplevel):
         self.label_info2 = tk.Label(self)
         self.label_info2.place(x=20, y=180)
 
-        # buttons
+        #buttons
         self.btn_info = ttk.Button(self, text="Info", command=self.info_pressed)
         self.btn_info.place(x=200, y=45)
         self.btn_info.bind('<Button-1>')
@@ -106,7 +107,6 @@ class Guest(tk.Toplevel):
         self.bell()
         self.grab_set() 
         self.focus_set()
-
   
 
     def info_pressed(self):
@@ -115,26 +115,25 @@ class Guest(tk.Toplevel):
             for key, value in self.stores.items():
                 if int(self.number.get()) == int(key):
                     self.label_info1.config(text=value.title()) #updating the label
-                
         except ValueError:
             message = "Please enter correct number\n(1-st floor: 1**, 2-nd floor: 2**)"
             self.label_info1.config(text=message)
+
 
     def find_pressed(self):
         """Finding the name of the store in the dictionary"""
         for key, value in self.stores.items():
             if str(self.name.get()) == str(value):
                 if int(key) < 106:
-                    self.label_info2.config(text="Floor-1, store number: " + str(key))
-                
+                    self.label_info2.config(text="Floor-1, store number: " + str(key))                
                 elif int(key) > 106 and int(key) < 206:
                         self.label_info2.config(text="Floor-2, store number: " + str(key))
-                
                 break
             else:
                 message = "Check the name!"
                 self.label_info2.config(text=message)
         
+
     def data_base(self):
         """Working with the database"""
         self.entry_name['state'] = NORMAL #entry`s state
@@ -143,12 +142,9 @@ class Guest(tk.Toplevel):
         self.btn_find['state'] = NORMAL
         conn = sqlite3.connect('data_base.db') #making the connection with the database
         cursor = conn.cursor()
-
-        
         query = 'SELECT number, name FROM stores' #SQL query to the database
         cursor.execute(query)
         data = cursor.fetchall() #getting data from the database
-    
         for line in data: #writing data from the database to the dictionary
             key = str(line[0])
             value = line[1]
@@ -156,7 +152,6 @@ class Guest(tk.Toplevel):
                 self.stores[key] = value
 
         
-
 class ManagerLogIn(tk.Toplevel):
     """Manager`s login window"""
     def __init__(self):
@@ -198,6 +193,7 @@ class ManagerLogIn(tk.Toplevel):
         self.grab_set()
         self.focus_set()
 
+
     def open_dialog4(self):
         """Autentication, finding the name and the password in database """
         with sqlite3.connect('data_base.db') as db:
@@ -223,6 +219,7 @@ class AdminLogIn(tk.Toplevel):
     def __init__(self):
         super().__init__(root)
         self.init_child()
+
 
     def init_child(self):
         self.title('Admin')
@@ -277,6 +274,7 @@ class ManagerWindow(tk.Toplevel):
     def __init__(self):
         super().__init__(root)
         self.init_child()
+
 
     def init_child(self):
         self.title('Store Manager')
@@ -339,7 +337,7 @@ class ManagerWindow(tk.Toplevel):
 
 
     def open_dialog2(self):
-        """Running the store foining window"""
+        """Running the store joining window"""
         if info[-1] == 0:  
             ms.showerror('Error!!', 'You can`t join the next empty\n store to yours, because it`s\n not empty!')
         else:
@@ -351,6 +349,7 @@ class StateChanging(tk.Toplevel):
     def __init__(self):
         super().__init__(root)
         self.init_child()
+
 
     def init_child(self):
         self.title('State changing')
@@ -398,7 +397,6 @@ class StateChanging(tk.Toplevel):
                 cursor.execute(query, [(new_name), (''), (''), (''), (''), (''), (info[0])])
                 conn.commit()
             self.destroy()
-
         else:
             new_name = self.entry_text.get()
             print(new_name)
@@ -410,12 +408,12 @@ class StateChanging(tk.Toplevel):
             self.destroy()
 
 
-
 class StoreJoining(tk.Toplevel):
     """Store joining window"""
     def __init__(self):
         super().__init__(root)
         self.init_child()
+
 
     def init_child(self):
         self.title('Store joining')
@@ -460,6 +458,7 @@ class AdminWindow(tk.Toplevel):
         super().__init__(root)
         self.init_child()
 
+
     def init_child(self):
         self.title('Admin')
         self.geometry('230x140+400+300')
@@ -483,6 +482,7 @@ class AdminWindow(tk.Toplevel):
         self.grab_set()
         self.focus_set()
 
+
     def open_dialog1(self):
         """Running admin`s state changing window"""
         AdminWindow2()
@@ -502,7 +502,6 @@ class AdminWindow(tk.Toplevel):
         results = cursor.fetchall()
         for result in results:
             print(result)
-
         
 
 class AdminWindow2(tk.Toplevel):
@@ -510,6 +509,7 @@ class AdminWindow2(tk.Toplevel):
     def __init__(self):
         super().__init__(root)
         self.init_child()
+
 
     def init_child(self):
         self.title('State changing')
@@ -574,8 +574,7 @@ class AdminWindow2(tk.Toplevel):
                 value = result[2]
                 self.stores[key] = value
             combobox_values = list(self.stores.keys())
-            self.combobox.config(values=combobox_values)
-            
+            self.combobox.config(values=combobox_values)            
         elif a == 2:
             conn = sqlite3.connect('data_base.db')
             cursor = conn.cursor()
@@ -601,7 +600,6 @@ class AdminWindow2(tk.Toplevel):
                 new_name = 'none'
                 cursor.execute(query, [(new_name), (''), (''), (''), (''), (self.combobox_value.get())])
                 conn.commit()
-
         else:
             new_name = self.entry_text.get()
             print(new_name)
@@ -611,6 +609,7 @@ class AdminWindow2(tk.Toplevel):
             query = 'UPDATE stores SET name = ? WHERE number = ?'
             cursor.execute(query, [(new_name), (self.combobox_value.get())])
             conn.commit()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
