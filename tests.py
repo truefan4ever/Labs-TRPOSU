@@ -6,6 +6,7 @@ import sys
 import time
 from tkinter import *
 import logging
+import sqlite3
 
 class Main(tk.Frame):
     def __init__(self, root):
@@ -70,6 +71,9 @@ class Child1(tk.Toplevel):
         self.geometry('330x220+400+300')
         self.resizable(False, False)
 
+        
+
+
         label1 = tk.Label(self, text='Choose the floor:')
         label1.place(x=20, y=10)
 
@@ -77,23 +81,28 @@ class Child1(tk.Toplevel):
         label2.place(x=20, y=70)
 
         # radiobuttons
-        self.r_button1 = tk.Radiobutton(self, text='Floor 1')
+        self.var1 = IntVar()
+        self.r_button1 = tk.Radiobutton(self, text='Floor 1', variable=self.var1, value=1, command=self.floor_selection)
         self.r_button1.place(x=40, y=40)
 
-        self.r_button2 = tk.Radiobutton(self, text='Floor 2')
+        self.r_button2 = tk.Radiobutton(self, text='Floor 2', variable=self.var1, value=2, command=self.floor_selection)
         self.r_button2.place(x=140, y=40)
 
-
-        self.entry = ttk.Entry(self)
+        self.entry_text = StringVar()
+        self.entry = ttk.Entry(self, textvariable=self.entry_text)
         self.entry.place(x=40, y=130)
 
-        self.combobox = ttk.Combobox(self, values=[u'Store1', u'Store2'])
-        self.combobox.current(0)
+        self.combobox_value = StringVar()
+        self.combobox = ttk.Combobox(self, textvariable=self.combobox_value, state='readonly')
         self.combobox.place(x=40, y=100)
 
-        self.var = IntVar()
-        self.checkbutton = tk.Checkbutton(self, text='Clean the store', variable=self.var, onvalue=1, offvalue=0)
+
+        
+        self.var2 = IntVar()
+        self.checkbutton = tk.Checkbutton(self, text='Clean the store', variable=self.var2, onvalue=1, offvalue=0)
         self.checkbutton.place(x=200, y=100)
+
+        
 
         btn_cancel = ttk.Button(self, text='Cancel', command=self.destroy)
         btn_cancel.place(x=220, y=170)
@@ -101,13 +110,72 @@ class Child1(tk.Toplevel):
         btn_ok = ttk.Button(self, text='Accept', command=self.mesbox)
         btn_ok.place(x=130, y=170)
         btn_ok.bind('<Button-1>')
+        
 
+    # def current_time(self):
+    #     return self.time.strftime('%H:%M:%S')
+
+    # def tick(self):
+    #     self.clock.after(200, self.tick)
+    #     self.clock['text'] = self.current_time
+
+
+    def floor_selection(self):
+        a = self.var1.get()
+        if a == 1:
+            conn = sqlite3.connect('data_base.db')
+            cursor = conn.cursor()
+            find_stores = ('SELECT * FROM stores WHERE floor = 1')
+            cursor.execute(find_stores)
+            results = cursor.fetchall()
+            self.stores = {}
+            for result in results:
+                key = str(result[0])
+                value = result[2]
+                self.stores[key] = value
+            combobox_values = list(self.stores.keys())
+            self.combobox.config(values=combobox_values)
+            
+   
+        elif a == 2:
+            conn = sqlite3.connect('data_base.db')
+            cursor = conn.cursor()
+            find_stores = ('SELECT * FROM stores WHERE floor = 2')
+            cursor.execute(find_stores)
+            results = cursor.fetchall()
+            self.stores = {}
+            for result in results:
+                key = str(result[0])
+                value = result[2]
+                self.stores[key] = value
+            combobox_values = list(self.stores.keys())
+            self.combobox.config(values=combobox_values)
+            
+
+    def combobox_choose(self):
+        self.entry_textvariable = StringVar(self, value=str(self.stores.get(self.combobox.get())))
+        self.entry.config(textvariable=self.entry_textvariable)
+            
 
     def mesbox(self):
-        if int(self.var.get()) == 1:
-            messagebox.askyesno("Confirmation", 'Are you sure?')
+        if int(self.var2.get()) == 1:
+            if messagebox.askyesno("Confirmation", 'Are you sure?') == True:
+                conn = sqlite3.connect('data_base.db')
+                cursor = conn.cursor()
+                query = query = 'UPDATE stores SET name = ?, o_date = ?, c_date = ?, username = ?, password = ? WHERE number = ?'
+                new_name = 'none'
+                cursor.execute(query, [(new_name), (''), (''), (''), (''), (self.combobox_value.get())])
+                conn.commit()
+
         else:
-            print("KEK")
+            new_name = self.entry_text.get()
+            print(new_name)
+            print(self.combobox_value.get())
+            conn = sqlite3.connect('data_base.db')
+            cursor = conn.cursor()
+            query = 'UPDATE stores SET name = ? WHERE number = ?'
+            cursor.execute(query, [(new_name), (self.combobox_value.get())])
+            conn.commit()
 
 
 class Child2(tk.Toplevel):
@@ -127,19 +195,64 @@ class Child2(tk.Toplevel):
         label2 = tk.Label(self, text='2-store')
         label2.place(x=20, y=50)
 
-        self.entry1 = ttk.Entry(self)
+        self.entry_text1 = StringVar()
+        self.entry_text2 = StringVar()
+
+        self.entry1 = ttk.Entry(self, textvariable=self.entry_text1)
         self.entry1.place(x=80, y=20)
 
-        self.entry2 = ttk.Entry(self)
+        self.entry2 = ttk.Entry(self, textvariable=self.entry_text2)
         self.entry2.place(x=80, y=50)
 
 
         btn_cancel = ttk.Button(self, text='Cancel', command=self.destroy)
         btn_cancel.place(x=140, y=100)
 
-        btn_ok = ttk.Button(self, text='OK')
+        btn_ok = ttk.Button(self, text='OK', command=self.joining)
         btn_ok.place(x=40, y=100)
         btn_ok.bind('<Button-1>')
+
+    def joining(self):
+        conn = sqlite3.connect('data_base.db')
+        cursor = conn.cursor()
+        find_stores = ('SELECT * FROM stores ')
+        cursor.execute(find_stores)
+        results = cursor.fetchall()
+        self.stores = {}
+        for result in results:
+            key = str(result[0])
+            value = result[2]
+            if key !='' and value !='':
+                self.stores[key] = value
+        
+        for key1, value1 in self.stores.items():
+            
+            if self.entry_text1.get() == key1:
+                if value1 != 'none':
+                    print("full") 
+                    b = 1
+                else:
+                    print("empty")
+
+            if self.entry_text2.get() == key1:
+                if value1 == 'none':
+                    print("EMPTY")
+                    c = 2
+                    
+                else:
+                    print("FULL")
+        print(b + c)
+
+           
+
+            
+
+
+
+            
+
+
+
 
 
 if __name__ == "__main__":
