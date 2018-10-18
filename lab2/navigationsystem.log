@@ -156,3 +156,35 @@
 2018-09-27 19:28:38,395;input name: adidas; output: Check the name!
 2018-09-27 19:28:38,395;input name: adidas; output: Check the name!
 2018-09-27 19:28:38,395;input name: adidas; output: Floor-1, store number: 203
+2018-10-18 11:33:18,878;input number: 101; output: Samsung
+2018-10-18 11:33:26,371;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,371;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,371;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,371;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,371;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,371;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,418;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,418;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,418;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,418;input name: samsung; output: Check the name!
+2018-10-18 11:33:26,418;input name: samsung; output: Floor-1, store number: 101
+2018-10-18 11:34:16,896;input number: 1; output: Zara
+2018-10-18 11:34:22,770;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:34:22,786;input name: zara; output: Check the name!
+2018-10-18 11:35:13,453;input number: 101; output: Samsung
+2018-10-18 11:35:19,578;input name: samsung; output: Floor-1, store number: 101
+2018-10-18 11:35:25,080;input number: 201; output: Sony
+2018-10-18 11:35:34,710;input name: sony; output: Check the name!
+2018-10-18 11:35:34,710;input name: sony; output: Check the name!
+2018-10-18 11:35:34,710;input name: sony; output: Check the name!
+2018-10-18 11:35:34,710;input name: sony; output: Check the name!
+2018-10-18 11:35:34,710;input name: sony; output: Check the name!
+2018-10-18 11:35:34,710;input name: sony; output: Floor-1, store number: 201
